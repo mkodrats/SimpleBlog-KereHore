@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Simple BLOG</title>
+    <link rel="icon" href="images/kh.png">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <style media="screen">
+    @media screen and (min-width: 800px) {
+        .hidd, .col-md-4, .text-center, .circle{
+
+          display: hidden ;
+          padding: 0px !important;
+          border: 3px solid #1abc9c;
+        }
+      }
+    </style>
+  </head>
+  <body class="backround">
+    <nav class="navbar navbar-default" style="background-color: #1abc9c;">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/"><font color="white">Blog</font></a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="/newblog"><font color="white">New Blog</font> <span class="sr-only">(current)</span></a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <div class="input-group stylish-input-group">
+              <input type="text" class="form-control"  placeholder="Search" >
+              <span class="input-group-addon">
+                <button type="submit">
+                  <span class="glyphicon glyphicon-search"></span>
+                </button>
+              </span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </nav>
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <% for(var i=0; i < quotes.length; i++) { %>
+            <div class="media">
+              <div class="media-body blog">
+                <h3 class="media-heading"><%= quotes[i].judul %></h3><br>
+                <img src="images/av.jpg" alt="Gambar" class="img-responsive img-rounded"><br>
+                <p class="text-justify"><%= quotes[i].isi %></p>
+                <button class="btn btn-danger" id="delete">Hapus</button>
+                <!-- <button class="btn btn-info">Edit</button> -->
+                <button class="btn btn-default pull-right">Lanjut Baca</button>
+              </div>
+            </div>
+          <% } %>
+        </div>
+        <a href="#"></a>
+        <div class="col-md-4 text-center circle hidd">
+          <center><img src="images/ava.jpg" class="img-responsive" alt="Responsive image" ></center>
+          <center>  <font color="white"><h4>Kere Hore</h4></font></center>
+          <p style="color:white">Simple CRUD BLOG With Dockerfile</p>
+        </div>
+      </div>
+    </div>
+    <% include footer %>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <script>
+      var del = document.getElementById('delete')
+
+        del.addEventListener('click', function () {
+          fetch('delete', {
+            method: 'delete',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              'name': 'Darth Vader'
+            })
+          })
+          .then(res => {
+            if (res.ok) return res.json()
+          }).
+          then(data => {
+            console.log(data)
+            alert("Berhasil Dihapus");
+            window.location.reload()
+          })
+        })
+    </script>
+
+  </body>
+</html>
